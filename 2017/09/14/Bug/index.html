@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="奋进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="报告Bug的艺术">
+<meta property="og:url" content="http://yoursite.com/2017/09/14/Bug/index.html">
+<meta property="og:site_name" content="王斌彦的博客">
+<meta property="og:description" content="奋进">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-14T16:04:20.318Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="报告Bug的艺术">
+<meta name="twitter:description" content="奋进">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/14/Bug/"/>
+
+
+
+
+
+  <title>报告Bug的艺术 | 王斌彦的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王斌彦的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序天下</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/14/Bug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王斌彦">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王斌彦的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">报告Bug的艺术</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-14T23:58:47+08:00">
+                2017-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  奋进
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>“出错了。”</p>
+<p>没有那句话能像“出错了”一样让程序员/开发者如此沮丧，心里翻江倒海，怒火一点即燃，还要死掉一大片脑细胞。</p>
+<p>这句生硬的开场白通常标志着让开发者恐惧的长时间排错工作要开始了。</p>
+<p>在我的职业生涯中，我就进行过好几次这样的对话：<br>“出错了。”<br>“什么出错了？”<br>“网站。”<br>“网站什么地方出错了?”<br>“我不确定。你把它弄好就是了。“</p>
+<p>对于很多的非技术人员来说，这句话在逻辑推理方面简直滴水不漏。毕竟，他的工作不是测试网站，所以指出哪里出错也不是他的职责。</p>
+<p>但是，他发出了一个非常模糊的错误报告，意味着他决定承担起责任，报告一个需要修复的错误，同时，他也让修复过程变得耗时而混乱。</p>
+<h2 id="Bug：程序员的肉中刺"><a href="#Bug：程序员的肉中刺" class="headerlink" title="Bug：程序员的肉中刺"></a>Bug：程序员的肉中刺</h2><p>爱也好，恨也罢，bug是所有软件中不可避免的一部分。很多bug可以在程序员好几小时的试错中找到并修复。对于一名工程师，如果没有花大量时间去和问题提交者交谈，进行枯燥乏味的反复尝试以复现问题，他就不可能推断出问题到底是什么。修复bug的工作量很大。<br>“出错了”这样一句模糊的报告简直可以是任何情况——网站可能宕机，注册页面可能出错了，某个应用可能在你不知不觉时把用户的裸体拍下来并用电子邮件发给他们的朋友们——就是没有办法搞清楚是何种情况。</p>
+<h2 id="惊喜！你是质量管理员"><a href="#惊喜！你是质量管理员" class="headerlink" title="惊喜！你是质量管理员"></a>惊喜！你是质量管理员</h2><p>即使进行了最严格的质量保证（QA）测试，还是会不时有漏网的bug。对于小型团队以及个人开发者，通常根本没有任何正规的质量保证测试——这使得客户、经理或是员工都要承担一部分质量保证工作职责。</p>
+<p>作为一名和软件开发者一起工作的非技术人员，你总要在一定程度上扮演质量保证测试员的角色——无论这是否包括在你的岗位描述中。接受你的新职责对你有百利而无一害。当严重的bug影响了工作，让整个团队面色凝重，你若能帮助寻找bug，会让bug更快地得到解决。</p>
+<h2 id="报告Bug的正确方式"><a href="#报告Bug的正确方式" class="headerlink" title="报告Bug的正确方式"></a>报告Bug的正确方式</h2><p>现在说说如何撰写一份bug报告，它可以帮助缩小问题的范围，可以让你的开发者高兴，还可以让你的软件尽快正常运行。</p>
+<h2 id="一份优秀的bug报告应该包括以下部分："><a href="#一份优秀的bug报告应该包括以下部分：" class="headerlink" title="一份优秀的bug报告应该包括以下部分："></a>一份优秀的bug报告应该包括以下部分：</h2><h3 id="1）概述"><a href="#1）概述" class="headerlink" title="1）概述"></a>1）概述</h3><p>出了什么问题？总结一下，不超过10个字。</p>
+<h3 id="2）定位"><a href="#2）定位" class="headerlink" title="2）定位"></a>2）定位</h3><p>哪里出了问题？如果是一个网站，把网址复制粘贴下来。如果不是，给出发生问题的窗口名称。</p>
+<h3 id="3）软件的运行环境是什么？"><a href="#3）软件的运行环境是什么？" class="headerlink" title="3）软件的运行环境是什么？"></a>3）软件的运行环境是什么？</h3><p>你是用的PC还是MAC？Firefox还是Chrome？iPad还是iPhone？iOS还是安卓？软件的版本是什么？你安装了什么浏览器插件？后台有哪些奇怪的软件在运行？</p>
+<h3 id="4）描述问题。"><a href="#4）描述问题。" class="headerlink" title="4）描述问题。"></a>4）描述问题。</h3><p>详细描述发生的问题。</p>
+<h3 id="5）列出问题复现的步骤。"><a href="#5）列出问题复现的步骤。" class="headerlink" title="5）列出问题复现的步骤。"></a>5）列出问题复现的步骤。</h3><p>描述问题发生前你做的每一个步骤。例如：“1）打开浏览器；2）访问www.mysite.com；3）点击“登录”按钮”</p>
+<h3 id="6）期待情况以及实际情况"><a href="#6）期待情况以及实际情况" class="headerlink" title="6）期待情况以及实际情况"></a>6）期待情况以及实际情况</h3><p>要写出当你执行了上述步骤后你期待发生什么，以及实际发生了什么。例如：“期待情况：显示登录表单。实际情况：一幅图片显示出来，上面有一只泰迪熊和一句话『网站故障，请耐心等待。』”</p>
+<h3 id="7）提出修复建议"><a href="#7）提出修复建议" class="headerlink" title="7）提出修复建议"></a>7）提出修复建议</h3><p>你认为你知道如何搞定这个问题？太好了！为工程师节省点时间，让他们少些困扰，把你关于应该如何解决问题的想法写下来吧。</p>
+<h3 id="8）截屏！"><a href="#8）截屏！" class="headerlink" title="8）截屏！"></a>8）截屏！</h3><p>如果你能看见问题的场景，将它截屏并附在报告中。有时，这是你在bug报告中提交的最重要的一件事。如果你能在截图上标示以指明问题，那就更好了。截屏取决于你使用的何种电脑或设备。如果无法截屏，用你的手机对屏幕拍照并发送出去。</p>
+<h3 id="9）优先级"><a href="#9）优先级" class="headerlink" title="9）优先级"></a>9）优先级</h3><p>优先级具有主观性，对于bug报告者总是觉得任何事都是最最重要。但是为了公平，先深呼吸一下，再考虑问题究竟有多重要。下列条目对你有所帮助。</p>
+<p>1.极度重要：“停下其他事，马上修复此问题！！！！”<br>2.重要：“需要尽快解决。”<br>3.一般：“快点修复，但如果不能马上解决也可以。”<br>4.不重要：“如果有必要，这个问题可以推后处理。”<br>5.极不重要：“这个想法或建议应该暂缓执行，以后再说。”</p>
+<h2 id="让工程师们爱上你"><a href="#让工程师们爱上你" class="headerlink" title="让工程师们爱上你"></a>让工程师们爱上你</h2><p>如果你发现了错误——不管它看起来多么吓人，停下你手里的事，后退一步，写一份合适的bug报告吧。</p>
+<p>如果你的开发者建有问题追踪系统，你应该登录上去，但如果你没有登上去（或是找不到），你可以发出电邮或是开始写一个文档。如果你经历了很多的bug，尝试着建立一个电子表格将它们全部列出来并分发出去。不要只是给工程师们打电话或是发给他们一行字的短信。对你发现的bug建档之后再发出警报，工程师们会利用你的报告来确定问题的优先级，并在修复过程中将其作为参考。</p>
+<p>所以，现在你在检查开发者推出的全新软件或是让你气都喘不上来的东西时，你知道怎样可以修复得更快、更高效，还不会打击到你的工程师们。你成为了团队里有用的一份子，而不是半点线索都不能提供的局外人，而且也许在这一过程中你学到的东西可以让你成为一位软件内行呢。</p>
+<p>PS：这个早读君可以分享下平时在项目中所看到的现象：<br>A：QA或编辑、运营直接贴两张图，让开发人员自己去发现臭虫，有点bug“找茬”。<br>B：前端的bug涉及到的浏览器版本，电脑类型等这些宿主因素，如果没说描述清楚的，修复bug的人还要二次去跟踪确认。<br>所以能否清楚、正确描述bug也是一门学问。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/13/hello-world/" rel="next" title="第一个Node.js程序">
+                <i class="fa fa-chevron-left"></i> 第一个Node.js程序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/images/touxiang.jpg"
+               alt="王斌彦" />
+          <p class="site-author-name" itemprop="name">王斌彦</p>
+           
+              <p class="site-description motion-element" itemprop="description">程序天下</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bug：程序员的肉中刺"><span class="nav-number">1.</span> <span class="nav-text">Bug：程序员的肉中刺</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#惊喜！你是质量管理员"><span class="nav-number">2.</span> <span class="nav-text">惊喜！你是质量管理员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报告Bug的正确方式"><span class="nav-number">3.</span> <span class="nav-text">报告Bug的正确方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一份优秀的bug报告应该包括以下部分："><span class="nav-number">4.</span> <span class="nav-text">一份优秀的bug报告应该包括以下部分：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）概述"><span class="nav-number">4.1.</span> <span class="nav-text">1）概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）定位"><span class="nav-number">4.2.</span> <span class="nav-text">2）定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）软件的运行环境是什么？"><span class="nav-number">4.3.</span> <span class="nav-text">3）软件的运行环境是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4）描述问题。"><span class="nav-number">4.4.</span> <span class="nav-text">4）描述问题。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5）列出问题复现的步骤。"><span class="nav-number">4.5.</span> <span class="nav-text">5）列出问题复现的步骤。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6）期待情况以及实际情况"><span class="nav-number">4.6.</span> <span class="nav-text">6）期待情况以及实际情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7）提出修复建议"><span class="nav-number">4.7.</span> <span class="nav-text">7）提出修复建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8）截屏！"><span class="nav-number">4.8.</span> <span class="nav-text">8）截屏！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9）优先级"><span class="nav-number">4.9.</span> <span class="nav-text">9）优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让工程师们爱上你"><span class="nav-number">5.</span> <span class="nav-text">让工程师们爱上你</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王斌彦</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
