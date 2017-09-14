@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="王斌彦的博客">
 <meta property="og:description" content="javascript函数封装整理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-14T16:19:20.984Z">
+<meta property="og:updated_time" content="2017-09-14T16:23:16.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用函数封装整理，还不来看看">
 <meta name="twitter:description" content="javascript函数封装整理">
@@ -329,196 +329,14 @@
       
         <p>代码在代码里面,由于分个发的话很长并且不易整理，所以写成页面了。。<br>搜索是可以用的哦，回车搜索。代码是手打的，检查过没错了(应该)，如果你还有补充或建议–&gt;留言。<br>全屏或保存到本地，看的效果更好哦，采用读取数据生成页面，可以把你自己整理的也写进数据，自动生成,但请注意锚点生成,本人取巧只能生成26个(a-z)</p>
 <p>提问:怎么解决代码保存问题(换行,正负号)？我知道可以直接用``这个符号，但是有的浏览器不支持，我为了保持代码原格式，疯狂转义，求解决方案。如果是你，怎么items里的pre怎么存储</p>
-<h2 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h2><pre>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style type="text/css">
-    *{padding: 0;margin:0;}
-    body,html{height: 100%;width: 100%;overflow: hidden;}
-    .box{height: 100%;}
-    .left{position: relative;float: left;width: 250px;background: #f9f9f9;overflow-y: auto;}
-    .right{box-sizing: border-box;padding: 20px;overflow: auto;min-width: 360px;}
-    .sidebar li{list-style: none;width: 100%;box-sizing:border-box;padding:10px;text-indent: 10px;font:14px/1.2em 'Microsoft YaHei';white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
-    .search{padding: 10px;border-bottom: 1px solid #999;}
-    .search input{width:180px;padding: 6px;border-radius: 3px;border: 1px solid #ccc;color: #474747;}
-    .sidebar li a{color: #474747;text-decoration: none;}
-    .content_box{padding:20px 0;}
-    .dir{text-indent: 20px; margin: 20px 0;}
-    .pre{padding: 10px;border: 1px solid rgb(216,216,216) ;border-radius: 3px; background: rgb(250,250,250);font:14px/30px "-webkit-body",'Microsoft YaHei';overflow-x: auto;}
-    *::-webkit-scrollbar {
-        width:8px;
-        height:8px;
-    }
-    *::-webkit-scrollbar-butto{
-        display: none;
-    }
-    *::-webkit-scrollbar-track     {
-        display: none;
-    }
-    *::-webkit-scrollbar-track-piece {
-        background:#eee;
-    }
-    *::-webkit-scrollbar-thumb{
-        background:#aaa;
-        border-radius:4px;
-    }
-    *::-webkit-scrollbar-corner {
-        display: none;
-    }
-    *::-webkit-scrollbar-resizer  {
-        background:#FF0BEE;
-    }
-    </style>
-</head>
-<body>
-    <div class="left box" id="sidebar_box">
-        <p class="search"><input type="text" name="" placeholder="Search...." id="search"></p>
-        <ul class="sidebar" id="sidebar">
-        </ul>
-    </div>
-    <div class="right box" id="content_box">
-        <div id="content"></div>
-    </div>
-    <script type="text/javascript">
-        var side_template = "<li><a href=\"#${key}\" title=\"${title}\">${title}</a></li>",
-            sidebar = document.getElementById("sidebar"),
-            content_template = "<div id=\"${key}\" class=\"content_box\"><h3>${title}</h3><p class=\"dir\">${dir}</p><pre class=\"pre\">${pre}</pre></div>",
-            content = document.getElementById("content"),
-            search = document.getElementById("search"),
-            items = [
-        {
-            "title":"添加事件",
-            "dir":"添加事件方法函数,兼容IE浏览器以及其他浏览器<br>addEvent(对象,事件名称,函数,是否捕获时触发)",
-            "pre":"\
-function addEvent(obj,type,fn,capture){\
-    if(obj.addEventListener){\
-        obj.addEventListener(type,fn,capture);\
-    }else if(obj.attachEvent){\
-        obj.attachEvent(\"on\"+type,fn);\
-    }\
-}"
-        },
-        {
-            "title":"移除事件",
-            "dir":"移除事件方法函数,兼容IE浏览器以及其他浏览器<br>removeEvent(对象,事件名称,函数,是否捕获时触发)",
-            "pre":"\
-function removeEvent(obj,type,fn,capture){\
-    if(obj.removeEventListener){\
-        obj.removeEventListener(type,fn,capture);\
-    }else if(obj.detachEvent){\
-        obj.detachEvent(\"on\"+type,fn);\
-    }\
-}            "
-        },
-        {
-            "title":"阻止默认行为",
-            "dir":"阻止对象默认行为<br>preDef(Event对象)",
-            "pre":"\
-function preDef(ev){\
-    var ev = ev || window.event;\
-    if(ev.preventDefault){\
-        ev.preventDefault();\
-    }else {\
-        ev.returnValue = false;\
-    }\
-}\            "},
-        {
-            "title":"获取触发事件目标",
-            "dir":"获取触发事件的节点<br>getTarget(Event对象)",
-            "pre":"\
-function getTarget(ev){\
-    var ev = ev || window.event;\
-    if(ev.target){\
-        return ev.target;\
-    }else if(window.event.srcElement){\
-        return window.event.srcElement;\
-    }\
-}\            "},
-        {
-            "title":"获取滚动条位置",
-            "dir":"获取滚动条的位置，即滚动距离，返回的结果是一个对象<br>",
-            "pre":"\
-function getSP(){\
-    return {\
-        top : document.documentElement.scrollTop || document.body.scrollTop,\
-        left : document.documentElement.scrollLeft || document.body.scrollLeft\
-    }\
-}"        },
-        {
-            "title":"获取可视化窗口大小",
-            "dir":"获取可视化窗口大小",
-            "pre":"\
-function getWindow(){\
-    if(window.innerWidth !== void 0){\
-        return {\
-            width : window.innerWidth,\
-            height : window.innerHeight\
-        }\
-    }else{\
-            return {\
-                width : document.documentElement.clientWidth,\
-                height : document.documentElement.clientHeight\
-            }\
-        }\
-}            "
-        },
-        {
-            "title":"获取屏幕坐标",
-            "dir":"获取鼠标的位置信息,该位置为鼠标在整个页面的位置，而不是可视化窗口的位置",
-            "pre":"\
-function getMouse(ev){\
-    if(ev.pageX !== void 0){\
-        return {x:ev.pageX,y:ev.pageY};\
-    }\
-    return {\
-        x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,\
-        y:ev.clientY + document.body.scrollTop - document.body.clientTop\
-    }\
-}            "
-        },
-        {
-            "title":"js拖拽效果(目标相对定位)",
-            "dir":"实现JS的拖拽效果,利用相对定位实现<br>onDrop(dom节点)",
-            "pre":"\
-function onDrop(ele){\
-    if(ele.nodeType === 1){\
-        ele.style.position = \"relative\";\
-        ele.onmousedown = function(ev){\
-            var ev = ev || window.event;\
-            var diffX = ev.clientX - parseInt(ele.style.left+\"0\"),\
-                diffY = ev.clientY - parseInt(ele.style.top+\"0\");\
-            document.onmousemove = function(e){\
-                var e = e || window.event;\
-                ele.style.left = e.clientX - diffX + \"px\";\
-                ele.style.top = e.clientY - diffY + \"px\";\
-            };\
-            document.onmouseup = function(e){\
-                var e = e || window.event;\
-                this.onmousemove = null;\
-                this.onmouseup = null;\
-            };\
-        }\
-    }\
-}            "},
-        {
-            "title":"判断类型",
-            "dir":"判断数据类型，返回首字母大写的字符串",
-            "pre":"\
-function getType(ob){\
-    return ({}).toString.call(ob).match(/(\\w+)\]$/)[1];\
-}"        },
-        {
-            "title":"数组去重",
-            "dir":"返回没有重复值的新数组(多个NaN也视为重复)<br>\
-            ES6最简 [...new Set([1,2,3,1,2,1,4])]<br>\
-            ES5最简 [1,2,3,1,4,1,2,1].filter(function(e,i,arr){return i===arr.indexOf(e)})",
-            "pre":"\
-function unique(arr){\
-    var a=[],hasNaN=false;\
-    for(var i=0;i<arr.length;i++){\
+<h2 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h2><p><pre><code><br>&lt;!DOCTYPE html&gt;</code></pre></p>
+<p><html lang="en"></html></p>
+<p><head><br>    <meta charset="UTF-8"><br>    <title>Document</title><br>    <style type="text/css"><br>    <em>{padding: 0;margin:0;}<br>    body,html{height: 100%;width: 100%;overflow: hidden;}<br>    .box{height: 100%;}<br>    .left{position: relative;float: left;width: 250px;background: #f9f9f9;overflow-y: auto;}<br>    .right{box-sizing: border-box;padding: 20px;overflow: auto;min-width: 360px;}<br>    .sidebar li{list-style: none;width: 100%;box-sizing:border-box;padding:10px;text-indent: 10px;font:14px/1.2em ‘Microsoft YaHei’;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}<br>    .search{padding: 10px;border-bottom: 1px solid #999;}<br>    .search input{width:180px;padding: 6px;border-radius: 3px;border: 1px solid #ccc;color: #474747;}<br>    .sidebar li a{color: #474747;text-decoration: none;}<br>    .content_box{padding:20px 0;}<br>    .dir{text-indent: 20px; margin: 20px 0;}<br>    .pre{padding: 10px;border: 1px solid rgb(216,216,216) ;border-radius: 3px; background: rgb(250,250,250);font:14px/30px “-webkit-body”,’Microsoft YaHei’;overflow-x: auto;}
+    </em>::-webkit-scrollbar {<br>        width:8px;<br>        height:8px;<br>    }<br>    <em>::-webkit-scrollbar-butto{<br>        display: none;<br>    }
+    </em>::-webkit-scrollbar-track     {<br>        display: none;<br>    }<br>    <em>::-webkit-scrollbar-track-piece {<br>        background:#eee;<br>    }
+    </em>::-webkit-scrollbar-thumb{<br>        background:#aaa;<br>        border-radius:4px;<br>    }<br>    <em>::-webkit-scrollbar-corner {<br>        display: none;<br>    }
+    </em>::-webkit-scrollbar-resizer  {<br>        background:#FF0BEE;<br>    }<br>    </style><br></head></p>
+<p><body><br>    <div class="left box" id="sidebar_box"><br>        <p class="search"><input type="text" name="" placeholder="Search...." id="search"></p><br>        <ul class="sidebar" id="sidebar"><br>        </ul><br>    </div><br>    <div class="right box" id="content_box"><br>        <div id="content"></div><br>    </div><br>    <script type="text/javascript"><br>        var side_template = “<li><a href=\"#${key}\" title=\"${title}\">${title}</a></li>“,<br>            sidebar = document.getElementById(“sidebar”),<br>            content_template = “<div id=\"${key}\" class=\"content_box\"><h3>${title}</h3><p class=\"dir\">${dir}</p><pre class=\"pre\">${pre}</pre></div>“,<br>            content = document.getElementById(“content”),<br>            search = document.getElementById(“search”),<br>            items = [<br>        {<br>            “title”:”添加事件”,<br>            “dir”:”添加事件方法函数,兼容IE浏览器以及其他浏览器<br>addEvent(对象,事件名称,函数,是否捕获时触发)”,<br>            “pre”:”\<br>function addEvent(obj,type,fn,capture){\<br>    if(obj.addEventListener){\<br>        obj.addEventListener(type,fn,capture);\<br>    }else if(obj.attachEvent){\<br>        obj.attachEvent(\”on\”+type,fn);\<br>    }\<br>}”<br>        },<br>        {<br>            “title”:”移除事件”,<br>            “dir”:”移除事件方法函数,兼容IE浏览器以及其他浏览器<br>removeEvent(对象,事件名称,函数,是否捕获时触发)”,<br>            “pre”:”\<br>function removeEvent(obj,type,fn,capture){\<br>    if(obj.removeEventListener){\<br>        obj.removeEventListener(type,fn,capture);\<br>    }else if(obj.detachEvent){\<br>        obj.detachEvent(\”on\”+type,fn);\<br>    }\<br>}            “<br>        },<br>        {<br>            “title”:”阻止默认行为”,<br>            “dir”:”阻止对象默认行为<br>preDef(Event对象)”,<br>            “pre”:”\<br>function preDef(ev){\<br>    var ev = ev || window.event;\<br>    if(ev.preventDefault){\<br>        ev.preventDefault();\<br>    }else {\<br>        ev.returnValue = false;\<br>    }\<br>}\            “},<br>        {<br>            “title”:”获取触发事件目标”,<br>            “dir”:”获取触发事件的节点<br>getTarget(Event对象)”,<br>            “pre”:”\<br>function getTarget(ev){\<br>    var ev = ev || window.event;\<br>    if(ev.target){\<br>        return ev.target;\<br>    }else if(window.event.srcElement){\<br>        return window.event.srcElement;\<br>    }\<br>}\            “},<br>        {<br>            “title”:”获取滚动条位置”,<br>            “dir”:”获取滚动条的位置，即滚动距离，返回的结果是一个对象<br>“,<br>            “pre”:”\<br>function getSP(){\<br>    return {\<br>        top : document.documentElement.scrollTop || document.body.scrollTop,\<br>        left : document.documentElement.scrollLeft || document.body.scrollLeft\<br>    }\<br>}”        },<br>        {<br>            “title”:”获取可视化窗口大小”,<br>            “dir”:”获取可视化窗口大小”,<br>            “pre”:”\<br>function getWindow(){\<br>    if(window.innerWidth !== void 0){\<br>        return {\<br>            width : window.innerWidth,\<br>            height : window.innerHeight\<br>        }\<br>    }else{\<br>            return {\<br>                width : document.documentElement.clientWidth,\<br>                height : document.documentElement.clientHeight\<br>            }\<br>        }\<br>}            “<br>        },<br>        {<br>            “title”:”获取屏幕坐标”,<br>            “dir”:”获取鼠标的位置信息,该位置为鼠标在整个页面的位置，而不是可视化窗口的位置”,<br>            “pre”:”\<br>function getMouse(ev){\<br>    if(ev.pageX !== void 0){\<br>        return {x:ev.pageX,y:ev.pageY};\<br>    }\<br>    return {\<br>        x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,\<br>        y:ev.clientY + document.body.scrollTop - document.body.clientTop\<br>    }\<br>}            “<br>        },<br>        {<br>            “title”:”js拖拽效果(目标相对定位)”,<br>            “dir”:”实现JS的拖拽效果,利用相对定位实现<br>onDrop(dom节点)”,<br>            “pre”:”\<br>function onDrop(ele){\<br>    if(ele.nodeType === 1){\<br>        ele.style.position = \”relative\”;\<br>        ele.onmousedown = function(ev){\<br>            var ev = ev || window.event;\<br>            var diffX = ev.clientX - parseInt(ele.style.left+\”0\”),\<br>                diffY = ev.clientY - parseInt(ele.style.top+\”0\”);\<br>            document.onmousemove = function(e){\<br>                var e = e || window.event;\<br>                ele.style.left = e.clientX - diffX + \”px\”;\<br>                ele.style.top = e.clientY - diffY + \”px\”;\<br>            };\<br>            document.onmouseup = function(e){\<br>                var e = e || window.event;\<br>                this.onmousemove = null;\<br>                this.onmouseup = null;\<br>            };\<br>        }\<br>    }\<br>}            “},<br>        {<br>            “title”:”判断类型”,<br>            “dir”:”判断数据类型，返回首字母大写的字符串”,<br>            “pre”:”\<br>function getType(ob){\<br>    return ({}).toString.call(ob).match(/(\w+)]$/)[1];\<br>}”        },<br>        {<br>            “title”:”数组去重”,<br>            “dir”:”返回没有重复值的新数组(多个NaN也视为重复)<br>\<br>            ES6最简 […new Set([1,2,3,1,2,1,4])]<br>\<br>            ES5最简 [1,2,3,1,4,1,2,1].filter(function(e,i,arr){return i===arr.indexOf(e)})”,<br>            “pre”:”\<br>function unique(arr){\<br>    var a=[],hasNaN=false;\<br>    for(var i=0;i<arr.length;i++){\
         if(a.indexOf(arr[i])==-1) {\
             if(arr[i]!==arr[i]){\
                 if(hasNaN){continue;}\
@@ -583,202 +401,61 @@ function getColor(){\
         },
         {
             "title":"天数跟秒转换",
-            "dir":"天数跟秒之间的转换,适用于倒计时,秒杀..<br>例如\"1天12小时12分32秒\"&lt;==&gt;130352之间相互转换",
-            "pre":"\
-function changeTime(t){\
-    if(typeof t === \"string\"){\
-        var num = 0;\
-        t.replace(/(\\d+)(天|小时|分|秒)/g,function(a,b,c){\
-            switch(c){\
-                case \"天\": num+=(+b)*86400;break;\
-                case \"小时\": num+=(+b)*3600;break;\
-                case \"分\": num+=(+b)*60;break;\
-                case \"秒\": num+=(+b);break;\
-            }\
-        });\
-        return num;\
-    }else if(typeof t === \"number\"){\
-        var time=\"\",ob={\"天\":86400,\"小时\":3600,\"分\":60,\"秒\":1};\
-        if(t<0) return \"0秒\";\
+            "dir":"天数跟秒之间的转换,适用于倒计时,秒杀..<br>例如\”1天12小时12分32秒\”&lt;==&gt;130352之间相互转换”,<br>            “pre”:”\<br>function changeTime(t){\<br>    if(typeof t === \”string\”){\<br>        var num = 0;\<br>        t.replace(/(\d+)(天|小时|分|秒)/g,function(a,b,c){\<br>            switch(c){\<br>                case \”天\”: num+=(+b)<em>86400;break;\<br>                case \”小时\”: num+=(+b)</em>3600;break;\<br>                case \”分\”: num+=(+b)<em>60;break;\<br>                case \”秒\”: num+=(+b);break;\<br>            }\<br>        });\<br>        return num;\<br>    }else if(typeof t === \”number\”){\<br>        var time=\”\”,ob={\”天\”:86400,\”小时\”:3600,\”分\”:60,\”秒\”:1};\<br>        if(t<0) return \"0秒\";\
         for(var name in ob){\
             var num = ob[name];\
-            if(t>=num){\
-                time += (t/num|0)+name;\
-                t %= num;\
-            }\
-        }\
-        return time;\
-    }\
-}            "},
-        {
-            "title":"JS千分隔位",
-            "dir":"每3位数加个逗号，保留两位小数<br>123456.454==&gt;123,456.45",
-            "pre":"\
-function separator(str){\
-    if(!isNaN(+str)){\
-        str = (+str).toFixed(2);\
-        return str.replace(/\\B(?=(?:\\d{3})+\\.)/g,\",\");\
-    }\
-}            "
-        },
-        {
-            "title":"获取计算后样式",
-            "dir":"获取某个节点计算后样式,参数为dom节点,属性名称",
-            "pre":"\
-function getCpStyle(ele,attribute){\
-    if(typeof getComputedStyle === \"function\"){\
-        return getComputedStyle(ele)[attribute];\
-    }else if(ele.currentStyle){\
-        return ele.currentStyle[attribute];\
-    }\
-}            "
-        },
-        {
-            "title":"获取XMLHTTPRequest对象",
-            "dir":"返回一个XMLHTTPRequest对象",
-            "pre":"\
-function getXHR(){\
-    var xhr;\
-    if(window.XMLHttpRequest){\
-        xhr = new XMLHttpRequest();\
-    }else if(window.ActiveXObject){\
-        xhr = new ActiveXObject(\"Microsoft.XMLHttp\");\
-    }\
-    return xhr;\
-}"},
-        {
-            "title":"类名操作",
-            "dir":"类似jq的toggleClass,没有就添加,有就删除",
-            "pre":"\
-function setClass(ele,className){\
-    if(ele.className !== void 0){\
-        var str = ele.className,reg=new RegExp(\"\\\\b\"+className+\"\\\\s\");\
-        if(reg.test(str)){\
-            str=str.replace(reg,\"\");\
-        }else{\
-            str += \" \"+className+\" \";\
-        }\
-        ele.className = str.replace(/\\s+/,\" \");\
-    }\
-}"    },
-        {
-            "title":"cookie操作",
-            "dir":"非本人写的，从mdn拉下来的，具体的可以去mdn看",
-            "pre":"\
-var docCookies = {\
-  getItem: function (sKey) {\
-    return decodeURIComponent(document.cookie.replace(new RegExp(\"(?:(?:^|.*;)\\\\s*\" + encodeURIComponent(sKey).replace(/[\\-\\.\\+\\*]/g, \"\\\\$&\") + \"\\\\s*\\\\=\\\\s*([^;]*).*$)|^.*$\"), \"$1\")) || null;\
-  },\
-  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {\
-    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }\
-    var sExpires = \"\";\
-    if (vEnd) {\
-      switch (vEnd.constructor) {\
-        case Number:\
-          sExpires = vEnd === Infinity ? \"; expires=Fri, 31 Dec 9999 23:59:59 GMT\" : \"; max-age=\" + vEnd;\
-          break;\
-        case String:\
-          sExpires = \"; expires=\" + vEnd;\
-          break;\
-        case Date:\
-          sExpires = \"; expires=\" + vEnd.toUTCString();\
-          break;\
-      }\
-    }\
-    document.cookie = encodeURIComponent(sKey) + \"=\" + encodeURIComponent(sValue) + sExpires + (sDomain ? \"; domain=\" + sDomain : \"\") + (sPath ? \"; path=\" + sPath : \"\") + (bSecure ? \"; secure\" : \"\");\
-    return true;\
-  },\
-  removeItem: function (sKey, sPath, sDomain) {\
-    if (!sKey || !this.hasItem(sKey)) { return false; }\
-    document.cookie = encodeURIComponent(sKey) + \"=; expires=Thu, 01 Jan 1970 00:00:00 GMT\" + ( sDomain ? \"; domain=\" + sDomain : \"\") + ( sPath ? \"; path=\" + sPath : \"\");\
-    return true;\
-  },\
-  hasItem: function (sKey) {\
-    return (new RegExp(\"(?:^|;\\\\s*)\" + encodeURIComponent(sKey).replace(/[\\-\\.\\+\\*]/g, \"\\\\$&\") + \"\\\\s*\\\\=\")).test(document.cookie);\
-  }\
-};            "},
-        {
-            "title" :"Ajax对象封装",
-            "dir":"ajax",
-            "pre":"\
-var Ajax={\
-    get: function(url, fn) {\
-        var obj = new XMLHttpRequest();\
-        obj.open('GET', url, true);\
-        obj.onreadystatechange = function() {\
-            if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) {\
-                fn.call(this, obj.responseText); \
-            }\
-        };\
-        obj.send();\
-    },\
-    post: function (url, data, fn) {  \
-        var obj = new XMLHttpRequest();\
-        obj.open(\"POST\", url, true);\
-        obj.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded\");\
-        obj.onreadystatechange = function() {\
-            if (obj.readyState == 4 && (obj.status == 200 || obj.status == 304)) { \
-                fn.call(this, obj.responseText);\
-            }\
-        };\
-        obj.send(data);\
-    }\
-}"
+            if(t>=num){\<br>                time += (t/num|0)+name;\<br>                t %= num;\<br>            }\<br>        }\<br>        return time;\<br>    }\<br>}            “},<br>        {<br>            “title”:”JS千分隔位”,<br>            “dir”:”每3位数加个逗号，保留两位小数<br>123456.454==&gt;123,456.45”,<br>            “pre”:”\<br>function separator(str){\<br>    if(!isNaN(+str)){\<br>        str = (+str).toFixed(2);\<br>        return str.replace(/\B(?=(?:\d{3})+\.)/g,\”,\”);\<br>    }\<br>}            “<br>        },<br>        {<br>            “title”:”获取计算后样式”,<br>            “dir”:”获取某个节点计算后样式,参数为dom节点,属性名称”,<br>            “pre”:”\<br>function getCpStyle(ele,attribute){\<br>    if(typeof getComputedStyle === \”function\”){\<br>        return getComputedStyle(ele)[attribute];\<br>    }else if(ele.currentStyle){\<br>        return ele.currentStyle[attribute];\<br>    }\<br>}            “<br>        },<br>        {<br>            “title”:”获取XMLHTTPRequest对象”,<br>            “dir”:”返回一个XMLHTTPRequest对象”,<br>            “pre”:”\<br>function getXHR(){\<br>    var xhr;\<br>    if(window.XMLHttpRequest){\<br>        xhr = new XMLHttpRequest();\<br>    }else if(window.ActiveXObject){\<br>        xhr = new ActiveXObject(\”Microsoft.XMLHttp\”);\<br>    }\<br>    return xhr;\<br>}”},<br>        {<br>            “title”:”类名操作”,<br>            “dir”:”类似jq的toggleClass,没有就添加,有就删除”,<br>            “pre”:”\<br>function setClass(ele,className){\<br>    if(ele.className !== void 0){\<br>        var str = ele.className,reg=new RegExp(\”\\b\”+className+\”\\s\”);\<br>        if(reg.test(str)){\<br>            str=str.replace(reg,\”\”);\<br>        }else{\<br>            str += \” \”+className+\” \”;\<br>        }\<br>        ele.className = str.replace(/\s+/,\” \”);\<br>    }\<br>}”    },<br>        {<br>            “title”:”cookie操作”,<br>            “dir”:”非本人写的，从mdn拉下来的，具体的可以去mdn看”,<br>            “pre”:”\<br>var docCookies = {\<br>  getItem: function (sKey) {\<br>    return decodeURIComponent(document.cookie.replace(new RegExp(\”(?:(?:^|.</em>;)\\s<em>\” + encodeURIComponent(sKey).replace(/[\-\.\+\</em>]/g, \”\\$&amp;\”) + \”\\s<em>\\=\\s</em>([^;]<em>).</em>$)|^.<em>$\”), \”$1\”)) || null;\<br>  },\<br>  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {\<br>    if (!sKey || /^(?:expires|max-age|path|domain|secure)$/i.test(sKey)) { return false; }\<br>    var sExpires = \”\”;\<br>    if (vEnd) {\<br>      switch (vEnd.constructor) {\<br>        case Number:\<br>          sExpires = vEnd === Infinity ? \”; expires=Fri, 31 Dec 9999 23:59:59 GMT\” : \”; max-age=\” + vEnd;\<br>          break;\<br>        case String:\<br>          sExpires = \”; expires=\” + vEnd;\<br>          break;\<br>        case Date:\<br>          sExpires = \”; expires=\” + vEnd.toUTCString();\<br>          break;\<br>      }\<br>    }\<br>    document.cookie = encodeURIComponent(sKey) + \”=\” + encodeURIComponent(sValue) + sExpires + (sDomain ? \”; domain=\” + sDomain : \”\”) + (sPath ? \”; path=\” + sPath : \”\”) + (bSecure ? \”; secure\” : \”\”);\<br>    return true;\<br>  },\<br>  removeItem: function (sKey, sPath, sDomain) {\<br>    if (!sKey || !this.hasItem(sKey)) { return false; }\<br>    document.cookie = encodeURIComponent(sKey) + \”=; expires=Thu, 01 Jan 1970 00:00:00 GMT\” + ( sDomain ? \”; domain=\” + sDomain : \”\”) + ( sPath ? \”; path=\” + sPath : \”\”);\<br>    return true;\<br>  },\<br>  hasItem: function (sKey) {\<br>    return (new RegExp(\”(?:^|;\\s</em>)\” + encodeURIComponent(sKey).replace(/[\-\.\+\<em>]/g, \”\\$&amp;\”) + \”\\s</em>\\=\”)).test(document.cookie);\<br>  }\<br>};            “},<br>        {<br>            “title” :”Ajax对象封装”,<br>            “dir”:”ajax”,<br>            “pre”:”\<br>var Ajax={\<br>    get: function(url, fn) {\<br>        var obj = new XMLHttpRequest();\<br>        obj.open(‘GET’, url, true);\<br>        obj.onreadystatechange = function() {\<br>            if (obj.readyState == 4 &amp;&amp; obj.status == 200 || obj.status == 304) {\<br>                fn.call(this, obj.responseText); \<br>            }\<br>        };\<br>        obj.send();\<br>    },\<br>    post: function (url, data, fn) {  \<br>        var obj = new XMLHttpRequest();\<br>        obj.open(\”POST\”, url, true);\<br>        obj.setRequestHeader(\”Content-type\”, \”application/x-www-form-urlencoded\”);\<br>        obj.onreadystatechange = function() {\<br>            if (obj.readyState == 4 &amp;&amp; (obj.status == 200 || obj.status == 304)) { \<br>                fn.call(this, obj.responseText);\<br>            }\<br>        };\<br>        obj.send(data);\<br>    }\<br>}”<br>        }<br>        ];</p>
+<pre><code>    //初始化
+    var sidebarInnerHTML = &quot;&quot;,contentInnerHTML=&quot;&quot;,AtoNum=97;
+    items.forEach(function(item,i) {
+        item.pre = format(item.pre);
+        item.filteri = i;
+        sidebarInnerHTML+=replace(side_template,item,i);
+        contentInnerHTML+=replace(content_template,item,i);
+    });
+    sidebar.innerHTML = sidebarInnerHTML;
+    content.innerHTML = contentInnerHTML;
+    search.onkeyup = function(e){
+        var e = e || window.event;
+        if(e.keyCode===13||!this.value){
+            Search();
         }
-        ];
+    }
 
-        //初始化
-        var sidebarInnerHTML = "",contentInnerHTML="",AtoNum=97;
-        items.forEach(function(item,i) {
-            item.pre = format(item.pre);
-            item.filteri = i;
-            sidebarInnerHTML+=replace(side_template,item,i);
-            contentInnerHTML+=replace(content_template,item,i);
+    //工具方法
+    function replace(str,item,i) {
+        return str.replace(/\${(\w+)}/g,function(a,b){
+            if(item[b]!==void 0){return item[b];}
+            if(b === &quot;key&quot;){return String.fromCharCode(AtoNum+i);}
+            return &apos;&apos;;
+        })
+    }
+    function  format(str) {
+        return str.replace(/(;|{|\b|,)(\s{2})|}}|;}|(&lt;|&gt;)/g,function (a,b,c,d) {
+            if(b||c){return b+&quot;\n&quot;+c;}
+            else if(d){if(d===&quot;&lt;&quot;) {return &quot;&amp;lt;&quot;;} else{return &quot;&amp;gt;&quot;;}}
+            else {if(a===&quot;}}&quot;) {return &quot;}\n}&quot;; }else{  return &quot;;\n}&quot;;}}
+        })
+    }
+    function changeSidebar(items){
+        var sidebarInnerHTML = &quot;&quot;;
+        items.forEach(function(item) {
+            sidebarInnerHTML+=replace(side_template,item,item.filteri);
         });
         sidebar.innerHTML = sidebarInnerHTML;
-        content.innerHTML = contentInnerHTML;
-        search.onkeyup = function(e){
-            var e = e || window.event;
-            if(e.keyCode===13||!this.value){
-                Search();
-            }
+    }
+    function Search(){
+        var value = search.value;
+        if(!value){changeSidebar(items);}
+        else{
+            changeSidebar(items.filter(function(item,i){
+                return item.title.indexOf(value)&gt;-1;
+            }));
         }
-
-        //工具方法
-        function replace(str,item,i) {
-            return str.replace(/\${(\w+)}/g,function(a,b){
-                if(item[b]!==void 0){return item[b];}
-                if(b === "key"){return String.fromCharCode(AtoNum+i);}
-                return '';
-            })
-        }
-        function  format(str) {
-            return str.replace(/(;|{|\b|,)(\s{2})|}}|;}|(<|>)/g,function (a,b,c,d) {
-                if(b||c){return b+"\n"+c;}
-                else if(d){if(d==="<") {return "&lt;";} else{return "&gt;";}}
-                else {if(a==="}}") {return "}\n}"; }else{  return ";\n}";}}
-            })
-        }
-        function changeSidebar(items){
-            var sidebarInnerHTML = "";
-            items.forEach(function(item) {
-                sidebarInnerHTML+=replace(side_template,item,item.filteri);
-            });
-            sidebar.innerHTML = sidebarInnerHTML;
-        }
-        function Search(){
-            var value = search.value;
-            if(!value){changeSidebar(items);}
-            else{
-                changeSidebar(items.filter(function(item,i){
-                    return item.title.indexOf(value)>-1;
-                }));
-            }
-        }
-    </script>
-</body>
-</html>
-</pre>
+    }
+&lt;/script&gt;
+</code></pre><p></body><br></html><br></pre></code></p>
+</script></body></p>
       
     </div>
     
