@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="javascript函数封装整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用函数封装整理，还不来看看">
+<meta property="og:url" content="http://yoursite.com/2017/09/15/function/index.html">
+<meta property="og:site_name" content="王斌彦的博客">
+<meta property="og:description" content="javascript函数封装整理">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-14T16:13:18.838Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用函数封装整理，还不来看看">
+<meta name="twitter:description" content="javascript函数封装整理">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/15/function/"/>
+
+
+
+
+
+  <title>常用函数封装整理，还不来看看 | 王斌彦的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王斌彦的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序天下</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王斌彦">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王斌彦的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">常用函数封装整理，还不来看看</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-15T00:10:20+08:00">
+                2017-09-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  javascript函数封装整理
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>代码在代码里面,由于分个发的话很长并且不易整理，所以写成页面了。。<br>搜索是可以用的哦，回车搜索。代码是手打的，检查过没错了(应该)，如果你还有补充或建议–&gt;留言。<br>全屏或保存到本地，看的效果更好哦，采用读取数据生成页面，可以把你自己整理的也写进数据，自动生成,但请注意锚点生成,本人取巧只能生成26个(a-z)</p>
+<p>提问:怎么解决代码保存问题(换行,正负号)？我知道可以直接用``这个符号，但是有的浏览器不支持，我为了保持代码原格式，疯狂转义，求解决方案。如果是你，怎么items里的pre怎么存储</p>
+<h2 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h2><p>&lt;!DOCTYPE html&gt;</p>
+<html lang="en"><br><head><br>    <meta charset="UTF-8"><br>    <title>Document</title><br>    <style type="text/css"><br>    <em>{padding: 0;margin:0;}<br>    body,html{height: 100%;width: 100%;overflow: hidden;}<br>    .box{height: 100%;}<br>    .left{position: relative;float: left;width: 250px;background: #f9f9f9;overflow-y: auto;}<br>    .right{box-sizing: border-box;padding: 20px;overflow: auto;min-width: 360px;}<br>    .sidebar li{list-style: none;width: 100%;box-sizing:border-box;padding:10px;text-indent: 10px;font:14px/1.2em ‘Microsoft YaHei’;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}<br>    .search{padding: 10px;border-bottom: 1px solid #999;}<br>    .search input{width:180px;padding: 6px;border-radius: 3px;border: 1px solid #ccc;color: #474747;}<br>    .sidebar li a{color: #474747;text-decoration: none;}<br>    .content_box{padding:20px 0;}<br>    .dir{text-indent: 20px; margin: 20px 0;}<br>    .pre{padding: 10px;border: 1px solid rgb(216,216,216) ;border-radius: 3px; background: rgb(250,250,250);font:14px/30px “-webkit-body”,’Microsoft YaHei’;overflow-x: auto;}
+    </em>::-webkit-scrollbar {<br>        width:8px;<br>        height:8px;<br>    }<br>    <em>::-webkit-scrollbar-butto{<br>        display: none;<br>    }
+    </em>::-webkit-scrollbar-track     {<br>        display: none;<br>    }<br>    <em>::-webkit-scrollbar-track-piece {<br>        background:#eee;<br>    }
+    </em>::-webkit-scrollbar-thumb{<br>        background:#aaa;<br>        border-radius:4px;<br>    }<br>    <em>::-webkit-scrollbar-corner {<br>        display: none;<br>    }
+    </em>::-webkit-scrollbar-resizer  {<br>        background:#FF0BEE;<br>    }<br>    </style><br></head><br><body><br>    <div class="left box" id="sidebar_box"><br>        <p class="search"><input type="text" name="" placeholder="Search...." id="search"></p><br>        <ul class="sidebar" id="sidebar"><br>        </ul><br>    </div><br>    <div class="right box" id="content_box"><br>        <div id="content"></div><br>    </div><br>    <script type="text/javascript"><br>        var side_template = “<li><a href=\"#${key}\" title=\"${title}\">${title}</a></li>“,<br>            sidebar = document.getElementById(“sidebar”),<br>            content_template = “<div id=\"${key}\" class=\"content_box\"><h3>${title}</h3><p class=\"dir\">${dir}</p><pre class=\"pre\">${pre}</pre></div>“,<br>            content = document.getElementById(“content”),<br>            search = document.getElementById(“search”),<br>            items = [<br>        {<br>            “title”:”添加事件”,<br>            “dir”:”添加事件方法函数,兼容IE浏览器以及其他浏览器<br>addEvent(对象,事件名称,函数,是否捕获时触发)”,<br>            “pre”:”\<br>function addEvent(obj,type,fn,capture){\<br>    if(obj.addEventListener){\<br>        obj.addEventListener(type,fn,capture);\<br>    }else if(obj.attachEvent){\<br>        obj.attachEvent(\”on\”+type,fn);\<br>    }\<br>}”<br>        },<br>        {<br>            “title”:”移除事件”,<br>            “dir”:”移除事件方法函数,兼容IE浏览器以及其他浏览器<br>removeEvent(对象,事件名称,函数,是否捕获时触发)”,<br>            “pre”:”\<br>function removeEvent(obj,type,fn,capture){\<br>    if(obj.removeEventListener){\<br>        obj.removeEventListener(type,fn,capture);\<br>    }else if(obj.detachEvent){\<br>        obj.detachEvent(\”on\”+type,fn);\<br>    }\<br>}            “<br>        },<br>        {<br>            “title”:”阻止默认行为”,<br>            “dir”:”阻止对象默认行为<br>preDef(Event对象)”,<br>            “pre”:”\<br>function preDef(ev){\<br>    var ev = ev || window.event;\<br>    if(ev.preventDefault){\<br>        ev.preventDefault();\<br>    }else {\<br>        ev.returnValue = false;\<br>    }\<br>}\            “},<br>        {<br>            “title”:”获取触发事件目标”,<br>            “dir”:”获取触发事件的节点<br>getTarget(Event对象)”,<br>            “pre”:”\<br>function getTarget(ev){\<br>    var ev = ev || window.event;\<br>    if(ev.target){\<br>        return ev.target;\<br>    }else if(window.event.srcElement){\<br>        return window.event.srcElement;\<br>    }\<br>}\            “},<br>        {<br>            “title”:”获取滚动条位置”,<br>            “dir”:”获取滚动条的位置，即滚动距离，返回的结果是一个对象<br>“,<br>            “pre”:”\<br>function getSP(){\<br>    return {\<br>        top : document.documentElement.scrollTop || document.body.scrollTop,\<br>        left : document.documentElement.scrollLeft || document.body.scrollLeft\<br>    }\<br>}”        },<br>        {<br>            “title”:”获取可视化窗口大小”,<br>            “dir”:”获取可视化窗口大小”,<br>            “pre”:”\<br>function getWindow(){\<br>    if(window.innerWidth !== void 0){\<br>        return {\<br>            width : window.innerWidth,\<br>            height : window.innerHeight\<br>        }\<br>    }else{\<br>            return {\<br>                width : document.documentElement.clientWidth,\<br>                height : document.documentElement.clientHeight\<br>            }\<br>        }\<br>}            “<br>        },<br>        {<br>            “title”:”获取屏幕坐标”,<br>            “dir”:”获取鼠标的位置信息,该位置为鼠标在整个页面的位置，而不是可视化窗口的位置”,<br>            “pre”:”\<br>function getMouse(ev){\<br>    if(ev.pageX !== void 0){\<br>        return {x:ev.pageX,y:ev.pageY};\<br>    }\<br>    return {\<br>        x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,\<br>        y:ev.clientY + document.body.scrollTop - document.body.clientTop\<br>    }\<br>}            “<br>        },<br>        {<br>            “title”:”js拖拽效果(目标相对定位)”,<br>            “dir”:”实现JS的拖拽效果,利用相对定位实现<br>onDrop(dom节点)”,<br>            “pre”:”\<br>function onDrop(ele){\<br>    if(ele.nodeType === 1){\<br>        ele.style.position = \”relative\”;\<br>        ele.onmousedown = function(ev){\<br>            var ev = ev || window.event;\<br>            var diffX = ev.clientX - parseInt(ele.style.left+\”0\”),\<br>                diffY = ev.clientY - parseInt(ele.style.top+\”0\”);\<br>            document.onmousemove = function(e){\<br>                var e = e || window.event;\<br>                ele.style.left = e.clientX - diffX + \”px\”;\<br>                ele.style.top = e.clientY - diffY + \”px\”;\<br>            };\<br>            document.onmouseup = function(e){\<br>                var e = e || window.event;\<br>                this.onmousemove = null;\<br>                this.onmouseup = null;\<br>            };\<br>        }\<br>    }\<br>}            “},<br>        {<br>            “title”:”判断类型”,<br>            “dir”:”判断数据类型，返回首字母大写的字符串”,<br>            “pre”:”\<br>function getType(ob){\<br>    return ({}).toString.call(ob).match(/(\w+)]$/)[1];\<br>}”        },<br>        {<br>            “title”:”数组去重”,<br>            “dir”:”返回没有重复值的新数组(多个NaN也视为重复)<br>\<br>            ES6最简 […new Set([1,2,3,1,2,1,4])]<br>\<br>            ES5最简 [1,2,3,1,4,1,2,1].filter(function(e,i,arr){return i===arr.indexOf(e)})”,<br>            “pre”:”\<br>function unique(arr){\<br>    var a=[],hasNaN=false;\<br>    for(var i=0;i<arr.length;i++){\
+        if(a.indexOf(arr[i])==-1) {\
+            if(arr[i]!==arr[i]){\
+                if(hasNaN){continue;}\
+                hasNaN = true;\
+                }\
+            a.push(arr[i]);\
+        }\
+    }\
+    return a;\
+}"        },
+        {
+            "title":"深度克隆",
+            "dir":"实现深度克隆对象",
+            "pre":"\
+function clone(ob){\
+    if(typeof ob=== \"object\"){\
+        var newOb = ({}).toString.call(ob)===\"[object Array]\"?[]:{};\
+        for(var name in ob){\
+            newOb[name] = typeof ob[name]===\"object\"?clone(ob[name]):ob[name];\
+        }\
+        return newOb;\
+    }else{\
+        return ob;\
+    }\
+}"        },
+        {
+            "title":"获取时间",
+            "dir":"\
+返回格式化后的时间,str为格式化样式,默认为(yyyy-MM-dd HH:mm:ss),date为时间对象，默认为当前时间\
+            ",
+            "pre":"\
+function getTime(str,date){\
+  var str = str || \"yyyy-MM-dd HH:mm:ss\";\
+  var date = date || new Date();\
+  var obj = {\
+    yyyy:date.getFullYear(),\
+    yy:(\"\"+ date.getFullYear()).slice(-2),\
+    M:date.getMonth()+1,\
+    MM:(\"0\"+ (date.getMonth()+1)).slice(-2),\
+    d:date.getDate(),\
+    dd:(\"0\" + date.getDate()).slice(-2),\
+    H:date.getHours(),\
+    HH:(\"0\" + date.getHours()).slice(-2),\
+    h:date.getHours() % 12,\
+    hh:(\"0\"+date.getHours() % 12).slice(-2),\
+    m:date.getMinutes(),\
+    mm:(\"0\" + date.getMinutes()).slice(-2),\
+    s:date.getSeconds(),\
+    ss:(\"0\" + date.getSeconds()).slice(-2),\
+    w:\"星期\"+['日', '一', '二', '三', '四', '五', '六'][date.getDay()]\
+  };\
+  return str.replace(/([a-z]+)/ig,function($1){return obj[$1]});\
+}        "
+        },
+        {
+            "title":"随机产生颜色",
+            "dir":"产生16进制的颜色值",
+            "pre":"\
+function getColor(){\
+    return \"#\"+Math.random().toString(16).substr(2,6);\
+}\            "
+        },
+        {
+            "title":"天数跟秒转换",
+            "dir":"天数跟秒之间的转换,适用于倒计时,秒杀..<br>例如\”1天12小时12分32秒\”&lt;==&gt;130352之间相互转换”,<br>            “pre”:”\<br>function changeTime(t){\<br>    if(typeof t === \”string\”){\<br>        var num = 0;\<br>        t.replace(/(\d+)(天|小时|分|秒)/g,function(a,b,c){\<br>            switch(c){\<br>                case \”天\”: num+=(+b)<em>86400;break;\<br>                case \”小时\”: num+=(+b)</em>3600;break;\<br>                case \”分\”: num+=(+b)<em>60;break;\<br>                case \”秒\”: num+=(+b);break;\<br>            }\<br>        });\<br>        return num;\<br>    }else if(typeof t === \”number\”){\<br>        var time=\”\”,ob={\”天\”:86400,\”小时\”:3600,\”分\”:60,\”秒\”:1};\<br>        if(t<0) return \"0秒\";\
+        for(var name in ob){\
+            var num = ob[name];\
+            if(t>=num){\<br>                time += (t/num|0)+name;\<br>                t %= num;\<br>            }\<br>        }\<br>        return time;\<br>    }\<br>}            “},<br>        {<br>            “title”:”JS千分隔位”,<br>            “dir”:”每3位数加个逗号，保留两位小数<br>123456.454==&gt;123,456.45”,<br>            “pre”:”\<br>function separator(str){\<br>    if(!isNaN(+str)){\<br>        str = (+str).toFixed(2);\<br>        return str.replace(/\B(?=(?:\d{3})+\.)/g,\”,\”);\<br>    }\<br>}            “<br>        },<br>        {<br>            “title”:”获取计算后样式”,<br>            “dir”:”获取某个节点计算后样式,参数为dom节点,属性名称”,<br>            “pre”:”\<br>function getCpStyle(ele,attribute){\<br>    if(typeof getComputedStyle === \”function\”){\<br>        return getComputedStyle(ele)[attribute];\<br>    }else if(ele.currentStyle){\<br>        return ele.currentStyle[attribute];\<br>    }\<br>}            “<br>        },<br>        {<br>            “title”:”获取XMLHTTPRequest对象”,<br>            “dir”:”返回一个XMLHTTPRequest对象”,<br>            “pre”:”\<br>function getXHR(){\<br>    var xhr;\<br>    if(window.XMLHttpRequest){\<br>        xhr = new XMLHttpRequest();\<br>    }else if(window.ActiveXObject){\<br>        xhr = new ActiveXObject(\”Microsoft.XMLHttp\”);\<br>    }\<br>    return xhr;\<br>}”},<br>        {<br>            “title”:”类名操作”,<br>            “dir”:”类似jq的toggleClass,没有就添加,有就删除”,<br>            “pre”:”\<br>function setClass(ele,className){\<br>    if(ele.className !== void 0){\<br>        var str = ele.className,reg=new RegExp(\”\\b\”+className+\”\\s\”);\<br>        if(reg.test(str)){\<br>            str=str.replace(reg,\”\”);\<br>        }else{\<br>            str += \” \”+className+\” \”;\<br>        }\<br>        ele.className = str.replace(/\s+/,\” \”);\<br>    }\<br>}”    },<br>        {<br>            “title”:”cookie操作”,<br>            “dir”:”非本人写的，从mdn拉下来的，具体的可以去mdn看”,<br>            “pre”:”\<br>var docCookies = {\<br>  getItem: function (sKey) {\<br>    return decodeURIComponent(document.cookie.replace(new RegExp(\”(?:(?:^|.</em>;)\\s<em>\” + encodeURIComponent(sKey).replace(/[\-\.\+\</em>]/g, \”\\$&amp;\”) + \”\\s<em>\\=\\s</em>([^;]<em>).</em>$)|^.<em>$\”), \”$1\”)) || null;\<br>  },\<br>  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {\<br>    if (!sKey || /^(?:expires|max-age|path|domain|secure)$/i.test(sKey)) { return false; }\<br>    var sExpires = \”\”;\<br>    if (vEnd) {\<br>      switch (vEnd.constructor) {\<br>        case Number:\<br>          sExpires = vEnd === Infinity ? \”; expires=Fri, 31 Dec 9999 23:59:59 GMT\” : \”; max-age=\” + vEnd;\<br>          break;\<br>        case String:\<br>          sExpires = \”; expires=\” + vEnd;\<br>          break;\<br>        case Date:\<br>          sExpires = \”; expires=\” + vEnd.toUTCString();\<br>          break;\<br>      }\<br>    }\<br>    document.cookie = encodeURIComponent(sKey) + \”=\” + encodeURIComponent(sValue) + sExpires + (sDomain ? \”; domain=\” + sDomain : \”\”) + (sPath ? \”; path=\” + sPath : \”\”) + (bSecure ? \”; secure\” : \”\”);\<br>    return true;\<br>  },\<br>  removeItem: function (sKey, sPath, sDomain) {\<br>    if (!sKey || !this.hasItem(sKey)) { return false; }\<br>    document.cookie = encodeURIComponent(sKey) + \”=; expires=Thu, 01 Jan 1970 00:00:00 GMT\” + ( sDomain ? \”; domain=\” + sDomain : \”\”) + ( sPath ? \”; path=\” + sPath : \”\”);\<br>    return true;\<br>  },\<br>  hasItem: function (sKey) {\<br>    return (new RegExp(\”(?:^|;\\s</em>)\” + encodeURIComponent(sKey).replace(/[\-\.\+\<em>]/g, \”\\$&amp;\”) + \”\\s</em>\\=\”)).test(document.cookie);\<br>  }\<br>};            “},<br>        {<br>            “title” :”Ajax对象封装”,<br>            “dir”:”ajax”,<br>            “pre”:”\<br>var Ajax={\<br>    get: function(url, fn) {\<br>        var obj = new XMLHttpRequest();\<br>        obj.open(‘GET’, url, true);\<br>        obj.onreadystatechange = function() {\<br>            if (obj.readyState == 4 &amp;&amp; obj.status == 200 || obj.status == 304) {\<br>                fn.call(this, obj.responseText); \<br>            }\<br>        };\<br>        obj.send();\<br>    },\<br>    post: function (url, data, fn) {  \<br>        var obj = new XMLHttpRequest();\<br>        obj.open(\”POST\”, url, true);\<br>        obj.setRequestHeader(\”Content-type\”, \”application/x-www-form-urlencoded\”);\<br>        obj.onreadystatechange = function() {\<br>            if (obj.readyState == 4 &amp;&amp; (obj.status == 200 || obj.status == 304)) { \<br>                fn.call(this, obj.responseText);\<br>            }\<br>        };\<br>        obj.send(data);\<br>    }\<br>}”<br>        }<br>        ];<br><br>        //初始化<br>        var sidebarInnerHTML = “”,contentInnerHTML=””,AtoNum=97;<br>        items.forEach(function(item,i) {<br>            item.pre = format(item.pre);<br>            item.filteri = i;<br>            sidebarInnerHTML+=replace(side_template,item,i);<br>            contentInnerHTML+=replace(content_template,item,i);<br>        });<br>        sidebar.innerHTML = sidebarInnerHTML;<br>        content.innerHTML = contentInnerHTML;<br>        search.onkeyup = function(e){<br>            var e = e || window.event;<br>            if(e.keyCode===13||!this.value){<br>                Search();<br>            }<br>        }<br><br>        //工具方法<br>        function replace(str,item,i) {<br>            return str.replace(/\${(\w+)}/g,function(a,b){<br>                if(item[b]!==void 0){return item[b];}<br>                if(b === “key”){return String.fromCharCode(AtoNum+i);}<br>                return ‘’;<br>            })<br>        }<br>        function  format(str) {<br>            return str.replace(/(;|{|\b|,)(\s{2})|}}|;}|(&lt;|&gt;)/g,function (a,b,c,d) {<br>                if(b||c){return b+”\n”+c;}<br>                else if(d){if(d===”&lt;”) {return “&lt;”;} else{return “&gt;”;}}<br>                else {if(a===”}}”) {return “}\n}”; }else{  return “;\n}”;}}<br>            })<br>        }<br>        function changeSidebar(items){<br>            var sidebarInnerHTML = “”;<br>            items.forEach(function(item) {<br>                sidebarInnerHTML+=replace(side_template,item,item.filteri);<br>            });<br>            sidebar.innerHTML = sidebarInnerHTML;<br>        }<br>        function Search(){<br>            var value = search.value;<br>            if(!value){changeSidebar(items);}<br>            else{<br>                changeSidebar(items.filter(function(item,i){<br>                    return item.title.indexOf(value)&gt;-1;<br>                }));<br>            }<br>        }<br>    </script><br></body><br></html>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/14/Bug/" rel="next" title="报告Bug的艺术">
+                <i class="fa fa-chevron-left"></i> 报告Bug的艺术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/images/touxiang.jpg"
+               alt="王斌彦" />
+          <p class="site-author-name" itemprop="name">王斌彦</p>
+           
+              <p class="site-description motion-element" itemprop="description">程序天下</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如下"><span class="nav-number">1.</span> <span class="nav-text">如下</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王斌彦</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
